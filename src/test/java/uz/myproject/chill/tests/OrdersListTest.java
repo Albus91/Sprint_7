@@ -14,14 +14,14 @@ public class OrdersListTest {
     @Test
     @DisplayName("Проверка вызова списка заказов")
     public void testOrdersListReturnsOrders() {
-        String response = sendOrdersRequest();
-        verifyResponseStatusCode(response);
-        verifyResponseBody(response);
+        sendOrdersRequest();
+        verifyResponseStatusCode();
+        verifyResponseBody();
     }
 
     @Step("Отправка запроса на список заказов")
-    public String sendOrdersRequest() {
-        return given()
+    public void sendOrdersRequest() {
+        given()
                 .baseUri(BASE_URL)
                 .header("Content-Type", "application/json")
                 .when()
@@ -32,7 +32,7 @@ public class OrdersListTest {
     }
 
     @Step("Проверка - статус код ответа 200")
-    public void verifyResponseStatusCode(String response) {
+    public void verifyResponseStatusCode() {
         given()
                 .baseUri(BASE_URL)
                 .when()
@@ -42,7 +42,7 @@ public class OrdersListTest {
     }
 
     @Step("Проверка наличия поля orders в теле ответа")
-    public void verifyResponseBody(String response) {
+    public void verifyResponseBody() {
         given()
                 .baseUri(BASE_URL)
                 .when()
